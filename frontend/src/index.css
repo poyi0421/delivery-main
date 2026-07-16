@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Modern Minimalist Light Theme Colors */
+  --bg-dark: #F6F8FA;         /* Soft Off-White Ground */
+  --bg-card: #FFFFFF;         /* Pure Crisp White Card */
+  --bg-card-hover: #FFFFFF;
+  --border-color: #E1E4EA;    /* Hairline Border */
+  
+  --text-primary: #1A1D24;    /* Slate Charcoal Primary Text */
+  --text-secondary: #5C6470;  /* Cool Grey Secondary Text */
+  --text-muted: #8892A2;      /* Muted Border / Placeholder */
+  
+  /* Minimal Matte Alert Accents */
+  --safety-orange: #FF6B00;       /* Matte Alert Orange */
+  --safety-orange-glow: rgba(255, 107, 0, 0.06);
+  --safety-orange-hover: #e56000;
+  
+  --safety-green: #00B4D8;        /* Clean Telemetry Teal/Cyan */
+  --safety-green-glow: rgba(0, 180, 216, 0.06);
+  --safety-green-hover: #0096B4;
+  
+  /* Standard Indicators */
+  --success: #10B981;             /* Forest Mint Success */
+  --error: #EF4444;               /* Matte Taillight Red */
+  --info: #3B82F6;                /* Modern Royal Blue */
+  
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Transitions */
+  --transition-fast: 0.12s ease;
+  --transition-normal: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Crisp Sans-Serif Headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+/* Form Controls & Inputs */
+input, select, textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px; /* Smooth rounded corners */
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 3px rgba(26, 29, 36, 0.04);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+/* Button UI System */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  outline: none;
+  transition: all var(--transition-normal);
+  user-select: none;
+}
+
+/* Solid Minimal Primary Button: defaults to Charcoal, shifts to platform accent on hover */
+.btn-orange {
+  background-color: var(--text-primary);
+  color: var(--bg-card);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.btn-orange:hover:not(:disabled) {
+  background-color: var(--safety-orange);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--safety-orange-glow);
+}
+
+.btn-orange:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-green {
+  background-color: var(--text-primary);
+  color: var(--bg-card);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.btn-green:hover:not(:disabled) {
+  background-color: var(--safety-green);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--safety-green-glow);
+}
+
+.btn-green:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--bg-card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Minimal Flat Cards */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.01);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.card-hover:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.card-orange-border {
+  border-left: 4px solid var(--safety-orange);
+}
+
+.card-green-border {
+  border-left: 4px solid var(--safety-green);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Flat Minimal Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+}
+
+.badge-pending {
+  background-color: #FFF0E6;
+  color: #E65A00;
+}
+
+.badge-preparing {
+  background-color: #EFF6FF;
+  color: var(--info);
+}
+
+.badge-ready {
+  background-color: #E0F2FE;
+  color: #0369A1;
+}
+
+.badge-delivering {
+  background-color: #FEF9C3;
+  color: #713F12;
+}
+
+.badge-completed {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+/* Spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  border-radius: 50%;
+  border-top-color: var(--text-primary);
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

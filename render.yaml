@@ -1,0 +1,43 @@
+services:
+  # 後端 FastAPI Web Service 部署配置
+  - type: web
+    name: delivery-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: alembic upgrade head && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: delivery-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+
+  # 前端 React Static Site 部署配置
+  - type: web
+    name: delivery-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: delivery-backend
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL
+
+databases:
+  # PostgreSQL 雲端資料庫配置
+  - name: delivery-db
+    databaseName: delivery
+    user: delivery_admin
+    plan: free
